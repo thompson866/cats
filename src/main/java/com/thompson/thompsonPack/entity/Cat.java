@@ -3,18 +3,22 @@ package com.thompson.thompsonPack.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
 @Entity
-@Table(name="cats")
+@Table(name = "cats")
 @Data
-@AllArgsConstructor
+@AllArgsConstructor // без анотации надо удалить id или добавить в DTO id(БД сама генерит id)
 
-public class Cat {@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private int id;
+@Builder //https://habr.com/ru/companies/otus/articles/552412/   иммутабельность+
+
+public class Cat {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     @Column(unique = true)
     private String name;
 
@@ -29,7 +33,8 @@ private int id;
         this.weight = weight;
     }
 
-    public Cat(){}
+    public Cat() {
+    }
 
 
 }
